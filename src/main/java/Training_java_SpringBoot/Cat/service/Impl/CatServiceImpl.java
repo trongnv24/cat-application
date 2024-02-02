@@ -46,4 +46,22 @@ public class CatServiceImpl implements CatService {
         log.info(" === Finish api getById car. Car id {} : === ", response.getId());
         return response;
     }
+    @Override
+    public CatResponse update(CatRequest request, String id) {
+        log.info(" === Start api update cat === ");
+        log.info(" === Request Body {} :, String id {}: ", request, id);
+        Optional<CatEntity> optionalCat = catRepository.findById(id);
+        if (!optionalCat.isPresent()) {
+            throw new RuntimeException();
+        }
+        CatEntity catEntity = optionalCat.get();
+        catEntity.setName(request.getName());
+        catEntity.setBreed(request.getBreed());
+        catEntity.setAge(request.getAge());
+        catEntity.setColor(request.getColor());
+        catEntity = catRepository.save(catEntity);
+        CatResponse response = convertEntityToCatResponse(catEntity);
+        log.info(" === Finish api update cat. Cat id {}: ", response.getId());
+        return response;
+    }
 }
