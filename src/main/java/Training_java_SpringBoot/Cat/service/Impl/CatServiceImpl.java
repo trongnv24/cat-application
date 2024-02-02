@@ -8,6 +8,8 @@ import Training_java_SpringBoot.Cat.service.CatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static Training_java_SpringBoot.Cat.service.mapping.CatMapping.convertDtoToEntity;
 import static Training_java_SpringBoot.Cat.service.mapping.CatMapping.convertEntityToCatResponse;
 
@@ -29,6 +31,19 @@ public class CatServiceImpl implements CatService {
         catEntity = catRepository.save(catEntity);
         CatResponse response = convertEntityToCatResponse(catEntity);
         log.info(" === Finish api create new cat . Cat id ===", response.getId());
+        return response;
+    }
+    @Override
+    public CatResponse getById(String id) {
+        log.info(" === Start api getById car");
+        log.info(" === String id:{} === ", id);
+        Optional<CatEntity> optionalCat = catRepository.findById(id);
+        if (!optionalCat.isPresent()) {
+            throw new RuntimeException();
+        }
+        CatEntity carEntity = optionalCat.get();
+        CatResponse response = convertEntityToCatResponse(carEntity);
+        log.info(" === Finish api getById car. Car id {} : === ", response.getId());
         return response;
     }
 }

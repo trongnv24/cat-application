@@ -5,4 +5,6 @@ import Training_java_SpringBoot.Cat.dto.response.CatResponse;
 
 public interface CatService {
     CatResponse create(CatRequest request);
+
+    CatResponse getById(String id);
 }
