@@ -46,4 +46,12 @@ public class CatController {
         log.info(" === Finish api update cat. Cat id {} : === ", response.getId());
         return response;
     }
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteById(@PathVariable("id") String id){
+        log.info(" === Start api update cat === ", id);
+        log.info(" === String id {} : === " );
+        log.info(" === Finish api update cat, Cat id {} : ===");
+        service.deleteById(id);
+    }
 }

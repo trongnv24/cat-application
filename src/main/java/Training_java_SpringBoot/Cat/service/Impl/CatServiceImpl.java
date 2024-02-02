@@ -8,6 +8,7 @@ import Training_java_SpringBoot.Cat.service.CatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.swing.undo.CannotRedoException;
 import java.util.Optional;
 
 import static Training_java_SpringBoot.Cat.service.mapping.CatMapping.convertDtoToEntity;
@@ -63,5 +64,17 @@ public class CatServiceImpl implements CatService {
         CatResponse response = convertEntityToCatResponse(catEntity);
         log.info(" === Finish api update cat. Cat id {}: ", response.getId());
         return response;
+    }
+    @Override
+    public void deleteById(String id){
+        log.info(" === Start api update cat === ");
+        log.info(" === String id {} : === ", id);
+        Optional<CatEntity> optionalCat = catRepository.findById(id);
+        if (!optionalCat.isPresent()){
+            throw new CannotRedoException();
+        }
+        log.info(" === Finish api delete cat, Cat id {} : === ");
+        catRepository.deleteById(id);
+
     }
 }

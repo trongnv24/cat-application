@@ -9,4 +9,6 @@ public interface CatService {
     CatResponse getById(String id);
 
     CatResponse update(CatRequest request, String id);
+
+    void deleteById(String id);
 }
