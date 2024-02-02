@@ -31,10 +31,19 @@ public class CatController {
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public CatResponse getById(@PathVariable("id") String id) {
-        log.info(" === Start api getById new cat === ");
+        log.info(" === Start api getById cat === ");
         log.info(" === String id : {} === ", id);
         CatResponse response = service.getById(id);
         log.info(" === Finish api getById cat. Cat id {} : === ", response.getId());
+        return response;
+    }
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CatResponse update(@RequestBody CatRequest request,@PathVariable("id") String id) {
+        log.info(" === Start api update cat === ");
+        log.info(" === Request Body, String id : {} === ", request, id);
+        CatResponse response = service.update(request, id);
+        log.info(" === Finish api update cat. Cat id {} : === ", response.getId());
         return response;
     }
 }

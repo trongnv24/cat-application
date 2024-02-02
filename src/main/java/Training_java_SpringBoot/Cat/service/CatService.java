@@ -7,4 +7,6 @@ public interface CatService {
     CatResponse create(CatRequest request);
 
     CatResponse getById(String id);
+
+    CatResponse update(CatRequest request, String id);
 }
