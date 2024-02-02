@@ -27,4 +27,14 @@ public class CatController {
         log.info(" === Finish api create new cat, cat id {} : === ", response.getId());
         return response;
     }
+
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CatResponse getById(@PathVariable("id") String id) {
+        log.info(" === Start api getById new cat === ");
+        log.info(" === String id : {} === ", id);
+        CatResponse response = service.getById(id);
+        log.info(" === Finish api getById cat. Cat id {} : === ", response.getId());
+        return response;
+    }
 }
